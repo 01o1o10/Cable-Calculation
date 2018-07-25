@@ -1,0 +1,17 @@
+/****** HTML *****/
+* {
+    box-sizing: border-box;
+}
+
+body{
+    color: white;
+    background: url('./../images/fiber-optics.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+span {
+    font-weight: bold;
+}

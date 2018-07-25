@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cable Calculation</title>
+</head>
+<body>
+
+    <!-- Modal body -->
+    <div class="modal-body">
+        <div class="container">
+            <form>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">U:</span>
+                    </div>
+                    <input id="kablo-hesabi-u" type="number" class="form-control" placeholder="V ...">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">P:</span>
+                    </div>
+                    <input id="kablo-hesabi-p" type="number" class="form-control" placeholder="kW ...">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">cos &#248;:</span>
+                    </div>
+                    <input id="kablo-hesabi-cosfi" type="number" class="form-control" placeholder="0 - 1 aralığında ...">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Yield:</span>
+                    </div>
+                    <input id="kablo-hesabi-verim" type="number" class="form-control" placeholder="0 - 1 aralığında ...">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" title="Correction factor">Corr factor:</span>
+                    </div>
+                    <input id="kablo-hesabi-duzeltme-faktoru" type="number" class="form-control" placeholder="0 - 1 aralığında ...">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Cable type:</span>
+                    </div>
+                    <select id="kablo-hesabi-tipi" class="custom-select-md form-control">
+                        <option value="NYYKablo3">NYY cable 3~</option>
+                        <option value="NYYKablo1">NYY cable 1~</option>
+                        <option value="N2XH0_0_6_1kV">(N)2XH 0.6-1kV</option>
+                        <option value="xlpe_kablo_0_6_1kV">xlpe cable 0.6-1 kV</option>
+                        <option value="xlpe_kablo_3_5_6kV">xlpe cable 3.5-6 kV</option>
+                        <option value="xlpe_kablo_6_10kV">xlpe cable 6-10 kV</option>
+                    </select>
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" title="Tempurature factor">Temp factor:</span>
+                    </div>
+                    <select id="kablo-hesabi-sicaklik-faktoru" class="custom-select-md form-control">
+                        <option value="1">30&#176;</option>
+                        <option value="0.94">35&#176;</option>
+                        <option value="0.87">40&#176;</option>
+                        <option value="0.79">45&#176;</option>
+                        <option value="0.71">50&#176;</option>
+                        <option value="0.61">55&#176;</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="">L: </span>
+                    </div>
+                    <input id="kablo-hesabi-l1" type="number" class="form-control" placeholder="metre ...">
+                    <b style="margin: 10px"> + </b>
+                    <input id="kablo-hesabi-l2" type="number" class="form-control" placeholder="metre ...">
+                    <b style="margin: 10px"> + </b>
+                    <input id="kablo-hesabi-l3" type="number" class="form-control" placeholder="metre ...">
+                </div>
+                </br>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                            <span class="input-group-text">List of L:</span>
+                    </div>
+                    <input id="l-list" type="text" class="form-control">
+                </div>
+
+                <div id="kablo-hesabi-succes" class="alert alert-success" style="display: none;"></div>
+                <div id="kablo-hesabi-failed" class="alert alert-danger" style="display: none;"></div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal footer -->
+    <div class="modal-footer">
+        <div class="form-group" style="float: right; margin: 10px;">
+            <button data-toggle="modal" data-target="#import-excel-modal" type="button" class="btn btn-primary" id="kablo-hesabi-excelden">L From Excel</button>
+        </div>
+        <div class="form-group" style="float: right; margin: 10px;">
+            <button data-toggle="modal" data-target="#export-excel-modal" type="button" class="btn btn-primary" id="kablo-hesabi-raporla">Report</button>
+        </div>
+        <div class="form-group" style="float: right; margin: 10px;">
+            <button type="button" class="btn btn-primary" id="kablo-hesabi-sifirla">Reset</button>
+        </div>
+        <div class="form-group" style="float: right; margin: 10px;">
+            <button type="button" class="btn btn-primary" id="kablo-hesabi-submit" title="Calculate">Calc</button>
+        </div>
+    </div>
+
+    <!-- Export Excel Modal -->
+    <div class="modal" id="export-excel-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4>Report</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="container">
+                        <form>
+                            <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Target file:</span>
+                            </div>
+                            <input id="target-file" type="file" class="form-control" accept=".xls, .xlsx">
+                            </div>
+                            
+                            <div id="export-excel-succes" class="alert alert-success" style="display: none;"></div>
+                            <div id="export-excel-failed" class="alert alert-danger" style="display: none;"></div>
+
+                            <div class="form-group" style="float: right; margin: 10px;">
+                                <button type="button" class="btn btn-primary" id="export-excel-submit">Ok</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Import Excel Modal -->
+    <div class="modal" id="import-excel-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4>Import</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="container">
+                        <form>
+                            <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Source File:</span>
+                            </div>
+                            <input id="source-file" type="file" class="form-control" accept=".xls, .xlsx">
+                            </div>
+                            
+                            <div id="import-excel-succes" class="alert alert-success" style="display: none;"></div>
+                            <div id="import-excel-failed" class="alert alert-danger" style="display: none;"></div>
+
+                            <div class="form-group" style="float: right; margin: 10px;">
+                                <button type="button" class="btn btn-primary" id="import-excel-submit">Ok</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!--CSS Files-->
+    <link rel="stylesheet" type="text/css" href="./public/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="./public/css/style.css">
+
+    <!--JS Files-->
+    <script type="application/javascript">
+        window.$ = window.jQuery = require('./public/js/jquery/jquery.min.js');
+    </script>
+    <script type="application/javascript" src="./public/js/modules/kablo.js"></script>
+    <script type="application/javascript" src="./public/js/bootstrap/popper.min.js"></script>
+    <script type="application/javascript" src="./public/js/bootstrap/bootstrap.min.js"></script>
+
+</body>
+</html>
