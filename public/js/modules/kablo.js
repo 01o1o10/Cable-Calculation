@@ -1,7 +1,7 @@
 "use strict";
 /////    KABLO HESABI DEĞİŞKENLER
 var kablo = {
-NYYKablo3: [
+NYYCable3: [
     [1.5, "4x1.5", 1.5, 43, undefined, undefined, 12.1, 0.366, undefined, 26, 18.5, undefined, undefined, undefined, undefined],
     [2.5, "4x2.5", 2.5, 72, undefined, undefined, 7.41, 0.34, undefined, 34, 25, undefined, undefined, undefined, undefined],
     [4, "4x4", 4, 115, undefined, undefined, 4.61, 0.339, undefined, 44, 34,  , undefined, undefined, undefined],
@@ -25,7 +25,7 @@ NYYKablo3: [
     ["1x400", "3(1x400) / 1x185", "1x400", undefined, undefined, undefined, 0.047, 0.298, undefined, 612, 636, undefined, undefined, undefined, undefined],
     ["1x500", "3(1x500) / 1x240", "1x500", undefined, undefined, undefined, 0.0366, 0.291, undefined, 689, 730, undefined, undefined, undefined, undefined]
 ],
-NYYKablo1: [
+NYYCable1: [
     [1.5, "3x1.5", 1.5, 43, 10.5, 175, 12.1, 0.343, undefined, 26, 18.5],
     [2.5, "3x2.5", 2.5, 72, 11.3, 220, 7.41, 0.317, undefined, 34, 25],
     [4, "3x4", 4, 115, 13.2, 315, 4.61, 0.316, undefined, 44, 34],
@@ -63,7 +63,7 @@ N2XH0_0_6_1kV: [
     ["1x185", "3(1x185) / 1x95", "1x185", 1776, "3x23 / 17", "3x1888 / 970", 0.0991, 0.278, undefined, undefined, 621, undefined, undefined, undefined],
     ["1x240", "3(1x240) / 1x120", "1x240", 2304, "3x26 / 19", "3x2412 / 1210", 0.0754, 0.273, undefined, undefined, 743, undefined, undefined, undefined]
 ],
-xlpe_kablo_0_6_1kV: [
+xlpe_cable_0_6_1kV: [
     [1.5, "4x1,5", 1.5, 43, 10.6, 175, 12.1, undefined, undefined, 30, 24, undefined, undefined, undefined],
     [2.5, "4x2,5", 2.5, 72, 11.4, 220, 7.41, undefined, undefined, 40, 32, undefined, undefined, undefined],
     [4, "4x4", 4, 115, 12.4, 280, 4.61, undefined, undefined, 52, 42, undefined, undefined, undefined],
@@ -89,7 +89,7 @@ xlpe_kablo_0_6_1kV: [
     ["1x185", "3(1x185) / 1x95", "1x185", 1597, 22.8, 1900, 0.0991, 0.313, undefined, 449, 507, undefined, undefined, undefined],
     ["1x240", "3(1x240) / 1x120", "1x240", 2113, 26, 2480, 0.0754, 0.301, undefined, 521, 606, undefined, undefined, undefined]
 ],
-xlpe_kablo_3_5_6kV: [
+xlpe_cable_3_5_6kV: [
     [25, "3x25ş / 16", 25, 921, 40.1, 3050, 0.727, 0.362, 0.255, 149, 141, undefined],
     [35, "3x35ş / 16", 35, 1209, 42.8, 3565, 0.524, 0.343, 0.285, 176, 171, undefined],
     [50, "3x50ş / 16", 50, 1671, 45, 4060, 0.387, 0.328, 0.312, 208, 196, undefined],
@@ -109,7 +109,7 @@ xlpe_kablo_3_5_6kV: [
     ["1x185", "3(1x185ş / 25)", "1x185", 2059, 29.4, 2360, 0.0991, 0.313, 0.525, 476, 543, undefined],
     ["1x240", "3(1x240ş / 25)", "1x240", 2587, 32.2, 2940, 0.0754, 0.301, 0.574, 550, 640, undefined]
 ],
-xlpe_kablo_6_10kV: [
+xlpe_cable_6_10kV: [
     [25, "3x25ş / 16", 25, 921, 44.3, 3520, 0.727, 0.386, 0.201, 148, 143, undefined, undefined],
     [35, "3x35ş / 16", 35, 1209, 47.5, 4085, 0.524, 0.366, 0.222, 178, 173, undefined, undefined],
     [50, "3x50ş / 16", 50, 1671, 49.7, 4625, 0.387, 0.349, 0.239, 210, 206, undefined, undefined],
@@ -152,16 +152,16 @@ var alert = function(id, message, succes){
 
 var kabloVeriOku = function(){
     var veri = {}
-    veri.U = document.getElementById('kablo-hesabi-u').value
-    veri.P = document.getElementById('kablo-hesabi-p').value
-    veri.cosfi = document.getElementById('kablo-hesabi-cosfi').value
-    veri.verim = document.getElementById('kablo-hesabi-verim').value
-    veri.dFaktoru = document.getElementById('kablo-hesabi-duzeltme-faktoru').value
-    veri.sFaktoru = document.getElementById('kablo-hesabi-sicaklik-faktoru').value
+    veri.U = parseFloat(document.getElementById('kablo-hesabi-u').value)
+    veri.P = parseFloat(document.getElementById('kablo-hesabi-p').value)
+    veri.cosfi = parseFloat(document.getElementById('kablo-hesabi-cosfi').value)
+    veri.verim = parseFloat(document.getElementById('kablo-hesabi-verim').value)
+    veri.dFaktoru = parseFloat(document.getElementById('kablo-hesabi-duzeltme-faktoru').value)
+    veri.sFaktoru = parseFloat(document.getElementById('kablo-hesabi-sicaklik-faktoru').value)
     veri.tipi = document.getElementById('kablo-hesabi-tipi').value
-    veri.l1 = document.getElementById('kablo-hesabi-l1').value
-    veri.l2 = document.getElementById('kablo-hesabi-l2').value
-    veri.l3 = document.getElementById('kablo-hesabi-l3').value
+    veri.l1 = parseFloat(document.getElementById('kablo-hesabi-l1').value)
+    veri.l2 = parseFloat(document.getElementById('kablo-hesabi-l2').value)
+    veri.l3 = parseFloat(document.getElementById('kablo-hesabi-l3').value)
     console.log(veri)
     kabloVeriGecerle(veri)
 }
@@ -183,7 +183,7 @@ var hesapla = function(veri){
     var sinfi = Math.sin(Math.acos(veri.cosfi))
     var ekipmanI = (veri.P * 1000) / (Math.sqrt(3, 2) * veri.U* veri.cosfi * veri.verim)
 
-    for(var i = 1; i < 3; i++){
+    for(var i = 1; i < 20; i++){
         for(var j = 0; j < kablo[veri.tipi].length; j++){
             var Rl = kablo[veri.tipi][j][6]
             var Ll = kablo[veri.tipi][j][7]
@@ -193,9 +193,9 @@ var hesapla = function(veri){
             var KabloSY = ekipmanI / duzeltilmis
             var Du = (1 / i) * Math.sqrt(3, 2) * (veri.L / 1000) * ekipmanI * (Rl * veri.cosfi + Xl * sinfi)
             var yuzdeE =  Du / veri.U+ 0.0025
-            var klasikYuzdeE = veri.L * 1000 * veri.P / (56 * kablo[veri.tipi][j][0] * veri.U * veri.U) + 0.0025
+            //var klasikYuzdeE = veri.L * 1000 * veri.P / (56 * kablo[veri.tipi][j][0] * veri.U * veri.U) + 0.0025
 
-            if((duzeltilmis / ekipmanI > 1) && (yuzdeE < 0.05) && (klasikYuzdeE < 0.05)){
+            if((duzeltilmis / ekipmanI > 1) && (yuzdeE < 0.05) /*&& (klasikYuzdeE < 0.05)*/){
                 console.log({sinfi: sinfi, ekipmanI: ekipmanI, Rl: Rl, Ll: Ll, kabloI: kabloI, Xl: Xl, duzeltilmis: duzeltilmis, KabloSY: KabloSY, Du: Du, yuzdeE: yuzdeE, kablo: {kabloSayisi: i, kabloKesiti: kablo[veri.tipi][j][0]}})
                 
                 if(!sonuc[veri.tipi]){
@@ -331,7 +331,7 @@ document.getElementById('import-excel-submit').onclick = function(){
 }
 
 document.getElementById('kablo-hesabi-tipi').onchange = function(){
-    if(this.value == 'NYYKablo3' || this.value == 'NYYKablo1'){
+    if(this.value == 'NYYCable3' || this.value == 'NYYCable1'){
         document.getElementById('kablo-hesabi-sicaklik-faktoru').innerHTML = '<option value="1">30&#176;</option><option value="0.94">35&#176;</option><option value="0.87">40&#176;</option><option value="0.79">45&#176;</option><option value="0.71">50&#176;</option><option value="0.61">55&#176;</option>'
     }
     else {
